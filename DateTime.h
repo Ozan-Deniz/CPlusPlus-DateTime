@@ -1,3 +1,5 @@
+//https://github.com/Ozan-Deniz/CPlusPlus-DateTime/blob/main/DateTime.h
+//ozandeniz@mail.com
 #pragma once
 #pragma warning(disable:4996)// This line is written to prevent Visual Studio from forcing us to use its own localtime implementation.
 
@@ -138,20 +140,21 @@ public:
 		TimeSpan operator-(TimePoint& other)
 		{
 			TimeSpan ts;
-
+			TimePoint tp1(this);//to prevent changes on the originals
+			TimePoint tp2(other);//to prevent changes on the originals
 			TimePoint* first;
 			TimePoint* second;
 			int multiplier = 1;
 			if (getNowLong() < other.getNowLong())
 			{
-				first = this;
-				second = &other;
+				first = &tp1;
+				second = &tp2;
 				multiplier = -1;
 			}
 			else
 			{
-				first = &other;
-				second = this;
+				first = &tp2;
+				second = &tp1;
 			}
 
 			ts.seconds += second->second - first->second;
@@ -177,7 +180,7 @@ public:
 
 			}
 			ts.seconds += total_days * 86400;
-
+			ts.seconds *= multiplier;
 			return ts;
 		}
 		bool isSameWeek(TimePoint& tp)
