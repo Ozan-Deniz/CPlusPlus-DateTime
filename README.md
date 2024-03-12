@@ -10,9 +10,6 @@ The code is written targeting a balance between ease of use and performance.
 
 
 
-
-Ozan Deniz, ozandeniz@mail.com © 2024
-
 ## License
 
 This library is developed by Ozan Deniz and is available under the [MIT License][(https://github.com/Ozan-Deniz/CPlusPlus-DateTime/blob/main/LICENSE.txt).]()
