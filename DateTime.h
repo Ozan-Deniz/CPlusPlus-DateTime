@@ -90,7 +90,7 @@ public:
 		{
 			int doy = day_of_year();
 			int day_of_the_week_of_the_first_day = ((day_of_week() - (doy % 7)) + 7) % 7;
-			std::cout << "Date : " << day << "/" << month << "/" << year << " day of the week of the first day : " << day_of_the_week_of_the_first_day << std::endl;
+			
 			return (doy + day_of_the_week_of_the_first_day) / 7;
 		}
 
@@ -104,7 +104,15 @@ public:
 			}
 			return (((y + y / 4 - y / 100 + y / 400 + t[month - 1] + day)+6) % 7);
 		}
-
+		TimePoint()
+		{
+			year = 2024;
+			month = 1;
+			day = 1;
+			hour = 0;
+			minute = 0;
+			second = 0;
+		}
 		TimePoint(std::tm* t)
 		{
 			year = t->tm_year + 1900;
@@ -324,27 +332,26 @@ public:
 					tp.minute += 60;
 					tp.subOneHour();
 				}
-				if (i != 0)
-				{
-					tp.second += i;
-					i = 0;
-					if (tp.second > 59)
-					{
-						tp.second -= 60;
-						tp.addOneMinute();
-					}
-					else if (tp.second < 0)
-					{
-						tp.second += 60;
-						tp.subOneMinute();
-					}
-				}
+				
 
 
 
 			}
-			
-
+			if (i != 0)
+			{
+				tp.second += i;
+				i = 0;
+				if (tp.second > 59)
+				{
+					tp.second -= 60;
+					tp.addOneMinute();
+				}
+				else if (tp.second < 0)
+				{
+					tp.second += 60;
+					tp.subOneMinute();
+				}
+			}
 			return tp;
 		}
 		
